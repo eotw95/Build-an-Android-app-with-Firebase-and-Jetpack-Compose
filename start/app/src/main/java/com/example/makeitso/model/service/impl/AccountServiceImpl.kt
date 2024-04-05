@@ -19,6 +19,7 @@ package com.example.makeitso.model.service.impl
 import com.example.makeitso.model.User
 import com.example.makeitso.model.service.AccountService
 import com.example.makeitso.model.service.trace
+import com.google.firebase.auth.EmailAuthCredential
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
@@ -58,7 +59,8 @@ class AccountServiceImpl @Inject constructor(private val auth: FirebaseAuth) : A
   }
 
   override suspend fun linkAccount(email: String, password: String) {
-    //TODO
+    val credential = EmailAuthProvider.getCredential(email, password)
+    auth.currentUser!!.linkWithCredential(credential).await()
   }
 
   override suspend fun deleteAccount() {

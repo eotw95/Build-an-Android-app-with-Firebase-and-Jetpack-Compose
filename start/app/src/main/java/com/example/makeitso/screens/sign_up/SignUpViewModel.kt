@@ -71,8 +71,11 @@ class SignUpViewModel @Inject constructor(
       return
     }
 
+    // Todo: Create account Button押下すると以下の文言が表示されてaccount作成できない。
+    //  The given sign-in provider is disabled for this Firebase project. Enable it in the Firebase console, under the sign-in method tab of the Auth section. [ Please verify the new email before changing email.
     launchCatching {
-      //TODO
+      accountService.linkAccount(email, password)
+      openAndPopUp(SETTINGS_SCREEN, SIGN_UP_SCREEN)
     }
   }
 }
