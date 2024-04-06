@@ -91,6 +91,7 @@ fun TasksScreenContent(
 
       Spacer(modifier = Modifier.smallSpacer())
 
+      // key = { it.id } は key = { it -> it.id } と同義
       LazyColumn {
         items(tasks, key = { it.id }) { taskItem ->
           TaskItem(
@@ -115,7 +116,8 @@ fun TasksScreenPreview() {
       onSettingsClick = { },
       onTaskCheckChange = { },
       onTaskActionClick = { _, _, _ -> },
-      openScreen = { }
+      openScreen = { },
+      tasks = listOf<Task>()
     )
   }
 }
