@@ -30,7 +30,7 @@ enum class TaskActionOption(val title: String) {
 
     fun getOptions(hasEditOption: Boolean): List<String> {
       val options = mutableListOf<String>()
-      values().forEach { taskAction ->
+      values().forEach { taskAction -> // Enumではvalues()で要素を取得できる。
         if (hasEditOption || taskAction != EditTask) {
           options.add(taskAction.title)
         }

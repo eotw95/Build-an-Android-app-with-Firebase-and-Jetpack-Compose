@@ -51,7 +51,8 @@ fun TasksScreen(
     onTaskCheckChange = viewModel::onTaskCheckChange,
     onTaskActionClick = viewModel::onTaskActionClick,
     openScreen = openScreen,
-    tasks = tasks.value
+    tasks = tasks.value,
+    options = viewModel.options.value
   )
 
   LaunchedEffect(viewModel) { viewModel.loadTaskOptions() }
@@ -67,7 +68,8 @@ fun TasksScreenContent(
   onTaskCheckChange: (Task) -> Unit,
   onTaskActionClick: ((String) -> Unit, Task, String) -> Unit,
   openScreen: (String) -> Unit,
-  tasks: List<Task>
+  tasks: List<Task>,
+  options: List<String>
 ) {
   Scaffold(
     floatingActionButton = {
@@ -96,7 +98,7 @@ fun TasksScreenContent(
         items(tasks, key = { it.id }) { taskItem ->
           TaskItem(
             task = taskItem,
-            options = listOf(),
+            options = options,
             onCheckChange = { onTaskCheckChange(taskItem) },
             onActionClick = { action -> onTaskActionClick(openScreen, taskItem, action) }
           )
@@ -117,7 +119,8 @@ fun TasksScreenPreview() {
       onTaskCheckChange = { },
       onTaskActionClick = { _, _, _ -> },
       openScreen = { },
-      tasks = listOf<Task>()
+      tasks = listOf<Task>(),
+      options = listOf<String>()
     )
   }
 }
